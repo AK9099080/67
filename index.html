@@ -1,61 +1,48 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <style>
-        /* The Vertical Bounce Animation */
-        @keyframes verticalBounce {
-            0%, 100% { transform: translateY(0); }
-            25% { transform: translateY(-20px); } /* Up */
-            50% { transform: translateY(10px); }  /* Down */
-            75% { transform: translateY(-10px); } /* Smaller Up */
+        /* The "67" Angled Motion */
+        @keyframes angledBounce {
+            0%   { transform: translate(0, 0) rotate(0deg); }
+            25%  { transform: translate(-8px, -25px) rotate(-3deg); } /* Up & Left Tilt */
+            50%  { transform: translate(8px, 15px) rotate(3deg); }    /* Down & Right Tilt */
+            75%  { transform: translate(-4px, -10px) rotate(-1.5deg); } 
+            100% { transform: translate(0, 0) rotate(0deg); }
         }
 
-        .bounce-active {
-            animation: verticalBounce 0.4s ease-in-out;
-            animation-iteration-count: 3; /* Repeats for the "6-7" rhythm */
+        .trigger-67 {
+            animation: angledBounce 0.4s ease-in-out;
+            animation-iteration-count: 2;
         }
 
-        /* Basic styling to center everything */
-        body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            background: #ffffff;
-            font-family: sans-serif;
+        /* Centering the UI */
+        body { 
+            display: flex; flex-direction: column; align-items: center; 
+            justify-content: center; height: 100vh; font-family: sans-serif; 
         }
-
-        #page-content {
-            text-align: center;
-        }
-
-        input {
-            padding: 10px;
-            font-size: 1.2rem;
-            border-radius: 8px;
-            border: 1px solid #ccc;
-        }
+        #container { text-align: center; }
+        input { padding: 10px; border-radius: 20px; border: 1px solid #ccc; width: 200px; }
     </style>
 </head>
 <body>
 
-    <div id="page-content">
-        <h1>Type 67</h1>
-        <input type="text" id="trigger" placeholder="Press Enter...">
+    <div id="container">
+        <h1 id="logo">Google 67 Test</h1>
+        <input type="text" id="search" placeholder="Type 67 and hit Enter">
     </div>
 
     <script>
-        const input = document.getElementById('trigger');
-        const content = document.getElementById('page-content');
+        const input = document.getElementById('search');
+        const container = document.getElementById('container');
 
-        input.addEventListener('keypress', (e) => {
+        input.addEventListener('keydown', (e) => {
             if (e.key === 'Enter' && input.value === '67') {
-                // Reset animation
-                content.classList.remove('bounce-active');
-                void content.offsetWidth; // Trigger reflow
-                // Start bounce
-                content.classList.add('bounce-active');
+                // Clear old animation
+                container.classList.remove('trigger-67');
+                void container.offsetWidth; // Force restart
+                // Start the angled bounce
+                container.classList.add('trigger-67');
             }
         });
     </script>
