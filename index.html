@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Google 67 Easter Egg Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f8f9fa;
+        }
+
+        /* 1. The Animation: Up and down movement */
+        @keyframes sixSevenBounce {
+            0%, 100% { transform: translateY(0); }
+            20% { transform: translateY(-15px); }
+            40% { transform: translateY(15px); }
+            60% { transform: translateY(-10px); }
+            80% { transform: translateY(10px); }
+        }
+
+        /* 2. The Class: Applied via JavaScript */
+        .shake-effect {
+            animation: sixSevenBounce 0.6s ease-in-out;
+            animation-iteration-count: 2; /* Mimics the brief meme motion */
+        }
+
+        #search-container {
+            text-align: center;
+            transition: transform 0.1s;
+        }
+
+        input {
+            padding: 12px 20px;
+            width: 300px;
+            border-radius: 24px;
+            border: 1px solid #dfe1e5;
+            font-size: 16px;
+            outline: none;
+            box-shadow: 0 1px 6px rgba(32,33,36,0.28);
+        }
+    </style>
+</head>
+<body>
+
+    <div id="search-container">
+        <h1 style="color: #4285F4;">G<span style="color:#EA4335">o</span><span style="color:#FBBC05">o</span>g<span style="color:#34A853">l</span><span style="color:#EA4335">e</span> Test</h1>
+        <p>Type <strong>67</strong> and press Enter to see the effect.</p>
+        <input type="text" id="search-bar" placeholder="Search...">
+    </div>
+
+    <script>
+        const searchInput = document.getElementById('search-bar');
+        const container = document.getElementById('search-container');
+
+        searchInput.addEventListener('keypress', function (e) {
+            if (e.key === 'Enter') {
+                const val = this.value.trim();
+                
+                // Trigger for "67", "6-7", or "6 7"
+                if (val === '67' || val === '6-7' || val === '6 7') {
+                    // Reset animation if already running
+                    container.classList.remove('shake-effect');
+                    void container.offsetWidth; // Trigger reflow
+                    
+                    container.classList.add('shake-effect');
+                }
+            }
+        });
+    </script>
+
+</body>
+</html>
